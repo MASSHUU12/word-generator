@@ -61,27 +61,31 @@ function App(): React.JSX.Element {
         </Button>
       </Stack>
       <List>
-        {words.map((word: string, i: number) => (
-          <ListItem key={word} disablePadding>
-            <ListItemButton
-              role="button"
-              onClick={() => handleToggle(i)}
-              dense
-              disableRipple
-            >
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  checked={checked.includes(i)}
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{ "aria-labelledby": word }}
-                />
-              </ListItemIcon>
-              <ListItemText id={word} primary={word} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {words.map((word: string, i: number) => {
+          const key = `${word}-${i}`;
+
+          return (
+            <ListItem key={key} disablePadding>
+              <ListItemButton
+                role="button"
+                onClick={() => handleToggle(i)}
+                dense
+                disableRipple
+              >
+                <ListItemIcon>
+                  <Checkbox
+                    edge="start"
+                    checked={checked.includes(i)}
+                    tabIndex={-1}
+                    disableRipple
+                    inputProps={{ "aria-labelledby": key }}
+                  />
+                </ListItemIcon>
+                <ListItemText id={key} primary={word} />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
       </List>
     </Box>
   );

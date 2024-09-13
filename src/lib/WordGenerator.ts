@@ -17,13 +17,40 @@ export function generateWords(
   return generatedWords;
 }
 
+function getRandomSyl(): string {
+  let syl: string = "";
+
+  const randCon = () => CONSONANTS[getRandomInt(0, CONSONANTS.length - 1)];
+  const randVow = () => VOWELS[getRandomInt(0, VOWELS.length - 1)];
+
+  switch (getRandomInt(0, 3)) {
+    case 0:
+      syl += randVow();
+      break;
+    case 1:
+      syl += randCon();
+      syl += randVow();
+      break;
+    case 2:
+      syl += randCon();
+      syl += randVow();
+      syl += randCon();
+      break;
+    case 3:
+      syl += randVow();
+      syl += randCon();
+      break;
+  }
+
+  return syl;
+}
+
 function generateWord(minSyl: number, maxSyl: number): string {
   let word: string = "";
   const syl: number = getRandomInt(minSyl, maxSyl);
 
   for (let j = 0; j < syl; j++) {
-    word += CONSONANTS[getRandomInt(0, CONSONANTS.length - 1)];
-    word += VOWELS[getRandomInt(0, VOWELS.length - 1)];
+    word += getRandomSyl();
   }
 
   return word;
