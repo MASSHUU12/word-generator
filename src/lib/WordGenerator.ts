@@ -1,4 +1,5 @@
 import { getRandomInt } from "./Random";
+import { replaceAt } from "./StringHelpers";
 
 const VOWELS = "aeiou";
 const CONSONANTS = "bcdfghjklmnpqrstvwxyz";
@@ -17,11 +18,16 @@ export function generateWords(
   return generatedWords;
 }
 
+function randCon(): string {
+  return CONSONANTS[getRandomInt(0, CONSONANTS.length - 1)];
+}
+
+function randVow(): string {
+  return VOWELS[getRandomInt(0, VOWELS.length - 1)];
+}
+
 function getRandomSyl(): string {
   let syl: string = "";
-
-  const randCon = () => CONSONANTS[getRandomInt(0, CONSONANTS.length - 1)];
-  const randVow = () => VOWELS[getRandomInt(0, VOWELS.length - 1)];
 
   switch (getRandomInt(0, 2)) {
     // case 0:
@@ -54,4 +60,31 @@ function generateWord(minSyl: number, maxSyl: number): string {
   }
 
   return word;
+}
+
+export function mutateWords(words: string[]): string[] {
+  for (let i = 0; i < words.length; i++) {
+    words[i] = mutateWord(words[i]);
+  }
+
+  return words;
+}
+
+function mutateChar(char: string): string {
+  return VOWELS.indexOf(char) !== -1 ? randVow() : randCon();
+}
+
+function mutateWord(word: string): string {
+  if (word.length === 0) {
+    return word;
+  }
+
+  const index = getRandomInt(0, word.length - 1);
+  let char = word[index];
+
+  do {
+    char = mutateChar(word[index]);
+  } while (char === word[index]);
+
+  return replaceAt(index, word, char);
 }

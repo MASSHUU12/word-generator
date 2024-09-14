@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { generateWords } from "./lib/WordGenerator";
+import { generateWords, mutateWords } from "./lib/WordGenerator";
 import Menu from "./components/Menu";
 import GeneratedWordsList from "./components/GeneratedWordsList";
 
@@ -31,7 +31,16 @@ function App(): React.JSX.Element {
     setChecked([]);
   };
 
-  const handleMutate = (): void => {};
+  const handleMutate = (): void => {
+    const selectedWords = words.filter((_, i) => checked.includes(i));
+    const mutatedWords = mutateWords(selectedWords);
+
+    const newWords = words.map((word, i) =>
+      checked.includes(i) ? (mutatedWords.shift() ?? "") : word,
+    );
+
+    setWords(newWords);
+  };
 
   return (
     <Box
