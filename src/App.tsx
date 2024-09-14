@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { generateWords } from "./lib/WordGenerator";
+import Menu from "./components/Menu";
 
 function App(): React.JSX.Element {
   const [words, setWords] = useState<string[]>([]);
@@ -31,7 +32,7 @@ function App(): React.JSX.Element {
   };
 
   const handleGenerate = (): void => {
-    setWords(generateWords(10, 1, 6));
+    setWords(generateWords(10, 1, 5));
     setChecked([]);
   };
 
@@ -39,6 +40,8 @@ function App(): React.JSX.Element {
     setWords([]);
     setChecked([]);
   };
+
+  const handleMutate = (): void => {};
 
   return (
     <Box
@@ -49,17 +52,11 @@ function App(): React.JSX.Element {
       alignItems="center"
     >
       <Typography variant="h1">Word Generator</Typography>
-      <Stack direction="row" spacing={2} justifyContent="center">
-        <Button variant="contained" onClick={handleGenerate}>
-          Generate
-        </Button>
-        <Button variant="contained" onClick={undefined}>
-          Mutate Selected
-        </Button>
-        <Button variant="contained" onClick={handleClear}>
-          Clear
-        </Button>
-      </Stack>
+      <Menu
+        onGenerateClick={handleGenerate}
+        onMutateClick={handleMutate}
+        onClearClick={handleClear}
+      />
       <List>
         {words.map((word: string, i: number) => {
           const key = `${word}-${i}`;
