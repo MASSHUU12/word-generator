@@ -41,8 +41,11 @@ function App(): React.JSX.Element {
       flexDirection="column"
       alignItems="center"
     >
-      <Typography variant="h2" component="h1" marginTop={8} marginBottom={2}>
+      <Typography variant="h2" component="h1" marginTop={6}>
         Word Generator
+      </Typography>
+      <Typography variant="body1" marginBottom={6}>
+        Generate words that have no meaning and make them meaningful.
       </Typography>
       <Menu
         onGenerateClick={handleGenerate}
