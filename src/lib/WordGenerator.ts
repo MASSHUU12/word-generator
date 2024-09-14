@@ -23,20 +23,20 @@ function getRandomSyl(): string {
   const randCon = () => CONSONANTS[getRandomInt(0, CONSONANTS.length - 1)];
   const randVow = () => VOWELS[getRandomInt(0, VOWELS.length - 1)];
 
-  switch (getRandomInt(0, 3)) {
+  switch (getRandomInt(0, 2)) {
+    // case 0:
+    //   syl += randVow();
+    //   break;
     case 0:
+      syl += randCon();
       syl += randVow();
       break;
     case 1:
       syl += randCon();
       syl += randVow();
+      syl += randCon();
       break;
     case 2:
-      syl += randCon();
-      syl += randVow();
-      syl += randCon();
-      break;
-    case 3:
       syl += randVow();
       syl += randCon();
       break;
