@@ -1,18 +1,17 @@
 import {
   Box,
-  Button,
   Checkbox,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Stack,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import { generateWords } from "./lib/WordGenerator";
 import Menu from "./components/Menu";
+import GeneratedWordsList from "./components/GeneratedWordsList";
 
 function App(): React.JSX.Element {
   const [words, setWords] = useState<string[]>([]);
@@ -57,33 +56,11 @@ function App(): React.JSX.Element {
         onMutateClick={handleMutate}
         onClearClick={handleClear}
       />
-      <List>
-        {words.map((word: string, i: number) => {
-          const key = `${word}-${i}`;
-
-          return (
-            <ListItem key={key} disablePadding>
-              <ListItemButton
-                role="button"
-                onClick={() => handleToggle(i)}
-                dense
-                disableRipple
-              >
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={checked.includes(i)}
-                    tabIndex={-1}
-                    disableRipple
-                    inputProps={{ "aria-labelledby": key }}
-                  />
-                </ListItemIcon>
-                <ListItemText id={key} primary={word} />
-              </ListItemButton>
-            </ListItem>
-          );
-        })}
-      </List>
+      <GeneratedWordsList
+        words={words}
+        checked={checked}
+        onItemToggle={handleToggle}
+      />
     </Box>
   );
 }
