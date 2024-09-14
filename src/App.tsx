@@ -1,13 +1,4 @@
-import {
-  Box,
-  Checkbox,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { generateWords } from "./lib/WordGenerator";
 import Menu from "./components/Menu";
@@ -50,7 +41,9 @@ function App(): React.JSX.Element {
       flexDirection="column"
       alignItems="center"
     >
-      <Typography variant="h1">Word Generator</Typography>
+      <Typography variant="h2" component="h1" marginTop={8} marginBottom={2}>
+        Word Generator
+      </Typography>
       <Menu
         onGenerateClick={handleGenerate}
         onMutateClick={handleMutate}

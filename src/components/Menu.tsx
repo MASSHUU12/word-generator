@@ -1,4 +1,4 @@
-import { Stack, Button } from "@mui/material";
+import { Button, ButtonGroup } from "@mui/material";
 
 interface Props {
   onGenerateClick: () => void;
@@ -12,17 +12,11 @@ function Menu({
   onClearClick,
 }: Props): React.JSX.Element {
   return (
-    <Stack direction="row" spacing={2} justifyContent="center">
-      <Button variant="contained" onClick={onGenerateClick}>
-        Generate
-      </Button>
-      <Button variant="contained" onClick={onMutateClick}>
-        Mutate Selected
-      </Button>
-      <Button variant="contained" onClick={onClearClick}>
-        Clear
-      </Button>
-    </Stack>
+    <ButtonGroup variant="outlined" aria-label="Main action buttons">
+      <Button onClick={onGenerateClick}>Generate</Button>
+      <Button onClick={onMutateClick}>Mutate Selected</Button>
+      <Button onClick={onClearClick}>Clear</Button>
+    </ButtonGroup>
   );
 }
 
